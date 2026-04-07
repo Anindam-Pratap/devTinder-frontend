@@ -19,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
          <Route path="/" element={<Feed />} />
          <Route path="/profile" element={<Profile />} />
+         <Route path="/error" element={<Error />} />
       </Route>
     </Routes>
 </BrowserRouter>

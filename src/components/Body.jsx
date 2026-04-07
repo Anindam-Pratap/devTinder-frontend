@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import NavBar from './NavBar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Footer from './Footer'
 import axios from 'axios'
 import { BASE_URL } from '../../utils/constants'
@@ -10,6 +10,7 @@ import { addUser } from '../../utils/userSlice'
 const Body = () => {
     const userData = useSelector((store)=>store.user)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const fetchUser = async () => {
         if(userData)return
        try{ const user = await axios.get(
@@ -18,7 +19,11 @@ const Body = () => {
         )
     dispatch(addUser(user.data))
     } catch(err){
-            console.log(err)
+            if(err.status === 401){
+                navigate("/login")
+            }else{
+                navigate("/error")
+            }
         }
     }
 
