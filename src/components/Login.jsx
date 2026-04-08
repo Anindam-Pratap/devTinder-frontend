@@ -9,10 +9,12 @@ import { BASE_URL } from "../../utils/constants"
 const Login = () => {
 const [emailId,SetEmailId] = useState("lukadoncic@gmail.com")
 const [password,SetPassword] = useState("Lukadoncic@123")
+const [error,setError] = useState("")
 const dispatch = useDispatch()
 const navigate = useNavigate()
 
 const loginUser = async() =>{
+  try{
     const res = await axios.post(
         BASE_URL+"login", 
     {emailId,password},
@@ -20,6 +22,9 @@ const loginUser = async() =>{
 
 dispatch(addUser(res.data))
 navigate("/")
+    }catch(err){
+     setError(err.message)
+    }
 }
 
   return (
@@ -32,7 +37,7 @@ navigate("/")
 
   <label className="label">Password</label>
   <input type="password" className="input" placeholder="Password" value={password} onChange={(e)=>{SetPassword(e.target.value)}} />
-
+<p className="text-amber-700">{error}</p>
   <button className="btn btn-neutral mt-4" onClick={loginUser}>Login</button>
 </fieldset>
 </div>
