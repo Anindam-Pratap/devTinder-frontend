@@ -12,8 +12,8 @@ const Body = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const fetchUser = async () => {
-        if(userData)return
-       try{ const user = await axios.get(
+        if(userData && userData._id)return
+       try{ const user = await axios.get( 
             BASE_URL+"profile/view",
             {withCredentials:true}
         )
