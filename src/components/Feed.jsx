@@ -33,7 +33,7 @@ fetchFeed()
       <div className="carousel rounded-box w-96">
 {user.map((e)=>(
   <div className='carousel-item'>
- <UserCard key={e?._id} user={e} />
+ <UserCard key={e?._id} user={e} firstButton="Ignore" secondButton="Interested" />
  </div>
 ))
 }

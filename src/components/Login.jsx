@@ -15,6 +15,7 @@ const navigate = useNavigate()
 
 const loginUser = async() =>{
   try{
+    
     const res = await axios.post(
         BASE_URL+"login", 
     {emailId,password},

@@ -17,6 +17,7 @@ try{await axios.post(
   {withCredentials:true}
 )
 dispatch(removeUser())
+navigate("/login")
 }catch(err){
 navigate("/error")
 }
@@ -40,12 +41,13 @@ navigate("/error")
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li>
-          <Link className="justify-between" to="/profile">
+          <Link className="justify-between" to="/update">
             Profile
             <span className="badge">New</span>
           </Link>
         </li>
-        <li><Link>Settings</Link></li>
+        <li><Link to="/connections">Connections</Link></li>
+        <li><Link to="Requests">Requests</Link></li>
         <li><Link to="/login" onClick={handleLogout}>Logout</Link></li>
       </ul>
     </div>

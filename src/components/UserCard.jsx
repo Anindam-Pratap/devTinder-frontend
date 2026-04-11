@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
-const UserCard = ({user}) => {
+const UserCard = ({user,firstButton,secondButton,onFirstClick,onSecondClick}) => {
 
-  const {firstName,lastName,about,photoUrl,gender,age} = user
+  const {firstName,lastName,about,photoUrl,gender,age,_id} = user
   return (
     <div>
          <div className="card bg-base-300 w-96 shadow-sm">
@@ -20,8 +21,8 @@ const UserCard = ({user}) => {
     </h2>
     <p>{about}</p>
     <div className="card-actions justify-end">
-      <div className="badge badge-outline bg-red-500">Ignore</div>
-      <div className="badge badge-outline bg-green-600">Interested</div>
+      <div className="badge badge-outline bg-red-500"><button className='cursor' onClick={()=>onFirstClick(_id)}>{firstButton}</button></div>
+      <div className="badge badge-outline bg-green-600"><button onClick={()=>onSecondClick(_id)}>{secondButton}</button></div>
     </div>
   </div>
 </div>
