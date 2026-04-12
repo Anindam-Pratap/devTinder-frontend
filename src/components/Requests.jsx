@@ -31,7 +31,7 @@ const Requests = () => {
       )
 
       // remove from UI instantly
-      setRequests((prev) => prev.filter((r) => r.fromUserId._id !== id))
+      setRequests((prev) => prev.filter((r) => r._id !== id))
 
       setRequestReviewAlert(true)
       setTimeout(() => setRequestReviewAlert(false), 5000)
@@ -50,7 +50,7 @@ const Requests = () => {
       )
 
       // remove from UI instantly
-      setRequests((prev) => prev.filter((r) => r.fromUserId._id !== id))
+      setRequests((prev) => prev.filter((r) => r._id !== id))
 
       setRequestReviewAlert(true)
       setTimeout(() => setRequestReviewAlert(false), 5000)
@@ -64,7 +64,7 @@ const Requests = () => {
   }, [])
 
   return (
-    (requests === null) ? <Shimmer /> :
+    (!requests) ? <div className='flex justify-center my-58'>YOU HAVE NO REQUESTS</div> :
       <div className='flex justify-center my-12'>
         <div className="carousel rounded-box w-96">
           {requests.map((e) => (
@@ -73,8 +73,8 @@ const Requests = () => {
                 user={e.fromUserId}
                 firstButton="Reject"
                 secondButton="Accept"
-                onFirstClick={() => rejectRequest(e.fromUserId._id)}
-                onSecondClick={() => acceptRequest(e.fromUserId._id)}
+                onFirstClick={() => rejectRequest(e._id)}
+                onSecondClick={() => acceptRequest(e._id)}
               />
             </div>
           ))}

@@ -9,6 +9,7 @@ import EditProfile from "./components/EditProfile"
 import PublicRoute from "./components/PublicRoute"
 import Connections from "./components/Connections"
 import Requests from "./components/Requests"
+import Signup from "./components/Signup"
 
 
 
@@ -30,8 +31,11 @@ function App() {
               <Route path="/error" element={<Error />} />
               <Route path="/update" element={<EditProfile />} />
               <Route path="/connections" element={<Connections />} />
-              <Route path="/requests" element={<Requests />} />
               
+              <Route path="/requests" element={<Requests />} />
+              <Route path="/signup" element={<PublicRoute>
+                  <Signup />
+                </PublicRoute>} />
             </Route>
           </Routes>
         </BrowserRouter>
