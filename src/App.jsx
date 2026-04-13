@@ -10,6 +10,7 @@ import PublicRoute from "./components/PublicRoute"
 import Connections from "./components/Connections"
 import Requests from "./components/Requests"
 import Signup from "./components/Signup"
+import PrivateRoute from "./components/PrivateRoute"
 
 
 
@@ -21,21 +22,21 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Body />}>
-              <Route path="/login" element={
-                <PublicRoute>
-                  <Login />
-                </PublicRoute>
-              } />
-              <Route path="/" element={<Feed />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route element={<PublicRoute />}>
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+              </Route>
+              <Route element={<PrivateRoute />}>
+                <Route index element={<Feed />} />
+                <Route path="/profile" element={<Profile />} />
+
+                <Route path="/update" element={<EditProfile />} />
+                <Route path="/connections" element={<Connections />} />
+
+                <Route path="/requests" element={<Requests />} />
+              </Route>
               <Route path="/error" element={<Error />} />
-              <Route path="/update" element={<EditProfile />} />
-              <Route path="/connections" element={<Connections />} />
-              
-              <Route path="/requests" element={<Requests />} />
-              <Route path="/signup" element={<PublicRoute>
-                  <Signup />
-                </PublicRoute>} />
+
             </Route>
           </Routes>
         </BrowserRouter>

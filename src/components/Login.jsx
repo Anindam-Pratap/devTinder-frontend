@@ -29,7 +29,7 @@ navigate("/")
 }
 
   return (
-    <div className='flex justify-center my-20'>
+    <div className='flex justify-center my-20 '>
 <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 ">
   <legend className="fieldset-legend mx-auto">Login</legend>
 

@@ -1,7 +1,9 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BASE_URL } from '../../utils/constants'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../../utils/userSlice'
 
 const Signup = () => {
     const [firstName, setFirstName] = useState()
@@ -13,21 +15,24 @@ const Signup = () => {
     const [profileCreatedAlert, setProfileCreatedAlert] = useState(false)
 
     const navigate = useNavigate()
-
+const dispatch = useDispatch()
     const signUpUser = async () => {
           if (!firstName || !lastName || !emailId || !password) {
     alert("Please fill all required fields")
     return
   }
         try {
-            await axios.post(
+            const res = await axios.post(
                 BASE_URL + "signup",
                 { firstName, lastName, gender, age, emailId, password },
                 { withCredentials: true }
             )
+            console.log(res)
+            dispatch(addUser(res.data))
+            
             setProfileCreatedAlert(true)
             setTimeout(() => {
-                navigate("/login")
+                navigate("/profile")
             }, 1500)
 
         } catch (err) {
@@ -38,7 +43,7 @@ const Signup = () => {
     }
     return (
         <div>
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto ">
                 <legend className="fieldset-legend">Sign Up</legend>
 
 
@@ -52,7 +57,7 @@ const Signup = () => {
                 <label className="label">Email</label>
                 <input type="email" className="input" placeholder="Email" onChange={(e) => (setEmailId(e.target.value))} value={emailId} />
                 <label className="label">Password</label>
-                <input type="passowrd" className="input" placeholder="Password" onChange={(e) => (setPassword(e.target.value))} value={password} />
+                <input type="password" className="input" placeholder="Password" onChange={(e) => (setPassword(e.target.value))} value={password} />
 
                 <label className="label">age</label>
                 <input type="number" className="input" placeholder="You must be 18+" onChange={(e) => (setAge(e.target.value))} value={age} />

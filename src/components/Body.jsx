@@ -11,31 +11,45 @@ const Body = () => {
     const userData = useSelector((store)=>store.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const fetchUser = async () => {
-        if(userData && userData._id)return
-       try{ const user = await axios.get( 
-            BASE_URL+"profile/view",
-            {withCredentials:true}
-        )
-    dispatch(addUser(user.data))
-    } catch(err){
-            if(err.status === 401){
-                navigate("/login")
-            }else{
-                navigate("/error")
-            }
-        }
+   const fetchUser = async () => {
+  if (userData && userData._id) return;
+
+  try {
+    const user = await axios.get(BASE_URL + "profile/view", {
+      withCredentials: true,
+    });
+
+    dispatch(addUser(user.data));
+  } catch (err) {
+    if (err.response?.status === 401) {
+      // not logged in → ignore
+      return;
+    } else {
+      navigate("/error");
     }
+  }
+};
 
     useEffect(()=>{
         fetchUser()
     },[])
   return (
-    <div className='flex flex-col min-h-screen'>
-        <NavBar />
-        <Outlet className="flex-1" />
-        <Footer />
-    </div>
+    <div className="min-h-screen flex flex-col relative">
+  
+  {/* Background */}
+  <div
+    className="absolute inset-0 bg-cover bg-center opacity-40"
+    style={{ backgroundImage: "url('/background.png')" }}
+  />
+
+  {/* Content */}
+  <div className="relative z-10 flex flex-col min-h-screen">
+    <NavBar />
+    <Outlet />
+    
+  </div>
+
+</div>
   )
 }
 
