@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { BASE_URL } from '../../utils/constants'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../../utils/userSlice'
 
@@ -22,12 +22,13 @@ const dispatch = useDispatch()
     return
   }
         try {
-            const res = await axios.post(
+           const res = await axios.post(
                 BASE_URL + "signup",
                 { firstName, lastName, gender, age, emailId, password },
                 { withCredentials: true }
             )
             console.log(res)
+            
             dispatch(addUser(res.data))
             
             setProfileCreatedAlert(true)
@@ -78,6 +79,7 @@ const dispatch = useDispatch()
                 </ul>
 
                 <button className="btn btn-neutral mt-4" onClick={() => signUpUser()}>Sign Up</button>
+                <p className="font-semibold"><Link to="/login">Already have a account? Login</Link></p>
             </fieldset>
             {profileCreatedAlert && (
                 <div className="toast toast-top toast-center">

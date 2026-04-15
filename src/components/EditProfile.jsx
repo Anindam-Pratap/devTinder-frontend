@@ -77,7 +77,7 @@ const EditProfile = () => {
        
         </fieldset>
         <div>
-          <div className='mx-5'>This is how your profile will look</div>
+          <div className='mx-5 font-bold'>This is how your profile will look</div>
           <div className='my-2 mx-5'><UserCard user={{ firstName, lastName, about, gender, age, photoUrl }} firstButton="Ignore" secondButton="Interested" /></div>
         </div>
         {profileUpdatedAlert &&(

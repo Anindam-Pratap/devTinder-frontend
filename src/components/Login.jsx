@@ -2,13 +2,13 @@ import axios from "axios"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addUser } from "../../utils/userSlice"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { BASE_URL } from "../../utils/constants"
 
 
 const Login = () => {
-const [emailId,SetEmailId] = useState("nikolajokic@gmail.com")
-const [password,SetPassword] = useState("Nikolajokic@123")
+const [emailId,SetEmailId] = useState("")
+const [password,SetPassword] = useState("")
 const [error,setError] = useState("")
 const dispatch = useDispatch()
 const navigate = useNavigate()
@@ -40,6 +40,7 @@ navigate("/")
   <input type="password" className="input" placeholder="Password" value={password} onChange={(e)=>{SetPassword(e.target.value)}} />
 <p className="text-amber-700">{error}</p>
   <button className="btn btn-neutral mt-4" onClick={loginUser}>Login</button>
+  <p className="font-semibold"><Link to="/signup">Don't have a account? SignUp </Link></p>
 </fieldset>
 </div>
   )
